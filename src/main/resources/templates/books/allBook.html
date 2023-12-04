@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 8px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .edit-button, .delete-button, .add-button, .back-button {
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #28a745;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+        }
+
+        .add-button {
+            background-color: #007bff;
+        }
+
+        .back-button {
+            background-color: #6c757d;
+        }
+
+        .edit-button:hover, .delete-button:hover, .add-button:hover, .back-button:hover {
+            text-decoration: none;
+        }
+
+        .my-5 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <div th:switch="${books}" class="container my-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+
+                <div th:case="*">
+                    <h2 class="my-5 text-center">Library</h2>
+                    <div class="search-form">
+                        <form method="get" action="/books/search" style="display: inline-block;">
+                            <input type="text" class="search-input" name="name" placeholder="Name">
+                            <button type="submit" class="search-button">🔍</button>
+                        </form>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Author</th>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Product</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book : ${books}">
+                            <td th:text="${book.name}"></td>
+                            <td th:text="${book.author}"></td>
+                            <td th:text="${book.clas != null ? book.clas.name : ''}"></td>
+                            <td th:text="${book.description}"></td>
+                            <td th:text="${book.product != null ? book.product.name : 'Мышка'}"></td>
+
+                            <td>
+                                <a th:href="@{/templates/books/editBook/{id}(id=${book.id})}" class="edit-button">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/templates/books/delete/{id}(id=${book.id})}" class="delete-button">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="my-5 text-center">
+                    <a href="/books/addBook" class="add-button">Add book</a>
+                </p>
+                <p class="my-5 text-center">
+                    <a href="/" class="back-button">Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: #d9534f;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .submit-button {
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .submit-button:hover {
+            background-color: #286090;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h2>Add book</h2>
+    <div class="container">
+        <form th:action="${'/books/addBook'}" th:object="${book}" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" th:field="*{name}" id="name" placeholder="Name">
+                <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" th:field="*{author}" id="author" placeholder="Author">
+                <span class="error-message" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+            </div>
+            <div class="form-group">
+                <label for="clas">Class</label>
+                <select th:field="*{clas}" id="clas" class="custom-select">
+                    <option value="">Choose class</option>
+                    <option th:each="classItem : ${classes}" th:value="${classItem.id}" th:text="${classItem.name}"></option>
+                </select>
+                <span class="error-message" th:if="${#fields.hasErrors('clas')}" th:errors="*{clas}"></span>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" th:field="*{description}" id="description" placeholder="Description">
+                <span class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </div>
+            <div>
+                <input type="submit" class="submit-button" value="Add book">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

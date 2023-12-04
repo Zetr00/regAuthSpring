@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Оружия</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .edit-button, .delete-button, .add-button, .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .edit-button:hover, .delete-button:hover, .add-button:hover, .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .my-5 {
+            margin-top: 5rem !important;
+            margin-bottom: 5rem !important;
+        }
+    </style>
+</head>
+<body>
+<div th:switch="${product}" class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+
+            <div th:case="*">
+                <h2 class="my-5 text-center">Products Shop</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td>
+                            <a th:href="@{/templates/products/editProduct/{id}(id=${product.id})}" class="edit-button">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/templates/products/delete/{id}(id=${product.id})}" class="delete-button">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5 text-center">
+                <a href="/products/addProduct" class="add-button">Add Product</a>
+            </p>
+            <p class="my-5 text-center">
+                <a href="/" class="back-button">Back</a>
+            </p>
+            <br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

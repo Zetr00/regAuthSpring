@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>AUTH</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    form {
+      max-width: 300px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    div {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    a {
+      display: block;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    div.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div th:if="${param.error}" class="error">
+  Неверное имя пользователя или пароль.
+</div>
+<form th:action="@{/login}" method="post">
+  <div><label> Логин : <input type="text" name="username"/> </label></div>
+  <div><label> Пароль : <input type="password" name="password"/> </label></div>
+  <div><input type="submit" value="Авторизация"/></div>
+</form>
+<a href="/registration">Регистрация</a>
+</body>
+</html>

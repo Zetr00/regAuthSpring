@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .add-button, .back-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .add-button:hover, .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div th:switch="${users}" class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+
+            <div th:case="*">
+                <h2 class="my-5 text-center">Users</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Midlename</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.surname}"></td>
+                        <td th:text="${user.midlename}"></td>
+                        <td>
+                            <a th:href="@{/templates/users/editUser/{id}(id=${user.id})}" class="edit-button">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/templates/users/delete/{id}(id=${user.id})}" class="delete-button">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5 text-center">
+                <a href="/users/addUser" class="add-button">Add user</a>
+                <a href="/" class="back-button">Back</a>
+            </p>
+        </div>
+        <br>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add user class</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #495057;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form th:action="${'/UC/addUC'}" method="post">
+    <h2>Add user class</h2>
+    <label>
+        <select name="users">
+            <div th:each="element : ${users}">
+                <option th:text="${element.name}"></option>
+            </div>
+        </select>
+    </label>
+    <label>
+        <select  name="clas">
+            <div th:each="element : ${clas}">
+                <option th:text="${element.name}"></option>
+            </div>
+        </select>
+    </label>
+    <br>
+    <div>
+        <button type="submit">Add user class</button>
+    </div>
+    <br>
+</form>
+</body>
+</html>

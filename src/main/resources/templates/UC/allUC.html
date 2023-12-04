@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users class</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #007bff;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            background-color: #fff;
+            color: #495057;
+        }
+
+        .add-button, .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .add-button:hover, .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div th:switch="${users}" class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+
+            <div th:case="*">
+                <h2 class="my-5 text-center">Users class</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Users</th>
+                        <th>Class</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="users : ${users}">
+                        <td th:text="${users.name}"></td>
+                        <td>
+                            <span th:each="clas : ${users.clas}">
+                                <span th:text="${clas.name}"></span><br>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5 text-center">
+                <a href="/UC/addUC" class="add-button">Add user class</a>
+            </p>
+            <p class="my-5 text-center">
+                <a href="/" class="back-button">Back</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
