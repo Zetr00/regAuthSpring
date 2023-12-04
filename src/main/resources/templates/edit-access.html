@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Изменение ролей</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #495057;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #007bff;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #dee2e6;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    td ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    td ul h5 {
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    select {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Изменение ролей</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Пользователь</th>
+    <th>Роль</th>
+    <th>Изменение</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td>
+      <ul>
+        <h5 th:each="role : ${user.roles}" th:text="${role}"></h5>
+      </ul>
+    </td>
+    <td>
+      <form method="post" th:action="@{/edit-access/{userId}/edit(userId=${user.ID_User})}">
+        <select name="roles">
+          <option value="USER">Пользователь</option>
+          <option value="ADMIN">Администратор</option>
+          <option value="MANAGER">Менеджер</option>
+        </select>
+        <button type="submit">Изменить роль</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
